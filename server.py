@@ -6,11 +6,8 @@ import numpy as np
 import sympy
 
 def generate_large_prime():
-    # Set the bit length for a large prime
-    bit_length = 1024
-
-    # Generate a random number with the specified bit length
-    candidate = np.random.get_state()[1][0] % (2**(bit_length - 1))
+    # Generate random int32
+    candidate = np.random.randint(np.iinfo(np.int32).min, np.iinfo(np.int32).max + 1, dtype=np.int32)
 
     # Ensure the candidate is odd
     candidate |= 1
@@ -33,11 +30,11 @@ def find_primitive_root(q):
 class ChaumPedersenServicer(proof_pb2_grpc.ChaumPedersenServiceServicer):
     def __init__(self) -> None:
         # Generate a large random prime number for q
-        q = generate_large_prime()
+        self.q = generate_large_prime()
 
         # Find g and h using q
-        g = find_primitive_root(q)
-        h = find_primitive_root(q)
+        self.g = find_primitive_root(self.q)
+        self.h = find_primitive_root(self.q)
 
     def Parameters(self, request, context):
         return proof_pb2.ParametersResponse(g=self.g, h=self.h, q=self.q)

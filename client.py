@@ -15,12 +15,11 @@ def register_with_server():
 
         # Choose numerical password x
         x = input("Enter numerical password x: ")
-        try:
-            x = int(x)
-        except ValueError:
+        while not int(x):
             print("Invalid input for x. Please enter a valid integer.")
-            return
-
+            x = input("Enter numerical password x: ")
+        
+        x = int(x)
         # Generate y1 = g^x and y2 = h^x
         y1 = parameters_response.g ** x
         y2 = parameters_response.h ** x
