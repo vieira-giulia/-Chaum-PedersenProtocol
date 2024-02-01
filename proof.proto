@@ -1,20 +1,20 @@
 syntax = "proto3";
 
-message ParametersRequest {
+//message ParametersRequest {
   // Client registration request
-}
+//}
 
-message ParametersResponse {
+//message ParametersResponse {
   // Server response with values of g, h, and q
-  int32 g = 1;
-  int32 h = 2;
-  int32 q = 3;
-}
+  //uint64 g = 1;
+  //uint64 h = 2;
+  //uint64 q = 3;
+//}
 
 message RegistrationRequest {
   // Client registration request
-  int32 y1 = 1;
-  int32 y2 = 2;
+  string y1 = 1;
+  string y2 = 2;
 }
 
 message RegistrationResponse {
@@ -24,28 +24,27 @@ message RegistrationResponse {
 
 message CommitmentChallengeRequest {
     // Client commitment request
-    int32 r1 = 1;
-    int32 r2 = 2;
+    string r1 = 1;
+    string r2 = 2;
 }
 
 message CommitmentChallengeResponse {
     // Server commitment challenge response
-    int32 c = 1;
+    string c = 1;
 }
 
 message VerifyProofRequest {
     // Client proof verification request
-    int32 s = 1;
+    string s = 1;
 }
 
 message VerifyProofResponse {
     // Server response for verification
     bool success = 1;
-    string message = 2;
 }
 
 service ChaumPedersenService {
-    rpc Parameters(ParametersRequest) returns (ParametersResponse);
+    // rpc Parameters(ParametersRequest) returns (ParametersResponse);
     rpc Register(RegistrationRequest) returns (RegistrationResponse);
     rpc CommitmentChallenge(CommitmentChallengeRequest) returns (CommitmentChallengeResponse);
     rpc VerifyProof(VerifyProofRequest) returns (VerifyProofResponse);
