@@ -36,17 +36,26 @@ class ChaumPedersenServicer(proof_pb2_grpc.ChaumPedersenServiceServicer):
         self.g = find_primitive_root(self.q)
         self.h = find_primitive_root(self.q)
 
+        self.client_y1 = None
+        self.client_y2 = None
+
+        self.r1 = None
+        self.r2 = None
+
     def Parameters(self, request, context):
         return proof_pb2.ParametersResponse(g=self.g, h=self.h, q=self.q)
     
     def Register(self, request, context):
         # Save registration
-        self.client_y1 = request.y1
-        self.clien_y2 = request.y2
+        if request.y1 and request.y2:
+            self.client_y1 = request.y1
+            self.clien_y2 = request.y2
 
-        print(f"Received registration: y1={self.y1}, y2={self.y2}")
-
-        return proof_pb2.RegistrationResponse(success=True)
+            print(f"Received registration: y1={self.client_y1}, y2={self.client_y2}")
+            return proof_pb2.RegistrationResponse(success=True)
+        else:
+            print('ERROR')
+            return proof_pb2.RegistrationResponse(success=False)
 
 
     def CommitmentChallenge(self, request, context):
@@ -64,11 +73,14 @@ class ChaumPedersenServicer(proof_pb2_grpc.ChaumPedersenServiceServicer):
         # Save proof
         s = request.s
 
+        if self.client_y1 is None or self.client_y2 is None:
+            return proof_pb2.LoginResponse(success=False, message='not registered')
+        
         # Verify proof
         verification = (self.r1 == (self.g**s)*(self.y1**self.c) 
                         and self.r2 == (self.h**s)(self.y2**self.c))
 
-        return proof_pb2.LoginResponse(success=verification)
+        return proof_pb2.LoginResponse(success=verification, message='yay')
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

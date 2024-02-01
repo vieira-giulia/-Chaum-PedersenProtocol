@@ -22,8 +22,8 @@ def register_with_server():
 
         # Send y1 and y2 as registration
         registration_request = proof_pb2.RegistrationRequest(y1=y1, y2=y2)
-        registration_response = stub.Parameters(registration_request)
-        
+        registration_response = stub.Register(registration_request)
+
         if registration_response:
             # Print y1 and y2 for client's reference
             print('Successful registration.')

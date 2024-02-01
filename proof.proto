@@ -41,6 +41,7 @@ message VerifyProofRequest {
 message VerifyProofResponse {
     // Server response for verification
     bool success = 1;
+    string message = 2;
 }
 
 service ChaumPedersenService {

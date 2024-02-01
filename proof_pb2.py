@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bproof.proto\"\x13\n\x11ParametersRequest\"5\n\x12ParametersResponse\x12\t\n\x01g\x18\x01 \x01(\x05\x12\t\n\x01h\x18\x02 \x01(\x05\x12\t\n\x01q\x18\x03 \x01(\x05\"-\n\x13RegistrationRequest\x12\n\n\x02y1\x18\x01 \x01(\x05\x12\n\n\x02y2\x18\x02 \x01(\x05\"\'\n\x14RegistrationResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"4\n\x1a\x43ommitmentChallengeRequest\x12\n\n\x02r1\x18\x01 \x01(\x05\x12\n\n\x02r2\x18\x02 \x01(\x05\"(\n\x1b\x43ommitmentChallengeResponse\x12\t\n\x01\x63\x18\x01 \x01(\x05\"\x1f\n\x12VerifyProofRequest\x12\t\n\x01s\x18\x01 \x01(\x05\"&\n\x13VerifyProofResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\x92\x02\n\x14\x43haumPedersenService\x12\x35\n\nParameters\x12\x12.ParametersRequest\x1a\x13.ParametersResponse\x12\x37\n\x08Register\x12\x14.RegistrationRequest\x1a\x15.RegistrationResponse\x12P\n\x13\x43ommitmentChallenge\x12\x1b.CommitmentChallengeRequest\x1a\x1c.CommitmentChallengeResponse\x12\x38\n\x0bVerifyProof\x12\x13.VerifyProofRequest\x1a\x14.VerifyProofResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bproof.proto\"\x13\n\x11ParametersRequest\"5\n\x12ParametersResponse\x12\t\n\x01g\x18\x01 \x01(\x05\x12\t\n\x01h\x18\x02 \x01(\x05\x12\t\n\x01q\x18\x03 \x01(\x05\"-\n\x13RegistrationRequest\x12\n\n\x02y1\x18\x01 \x01(\x05\x12\n\n\x02y2\x18\x02 \x01(\x05\"\'\n\x14RegistrationResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"4\n\x1a\x43ommitmentChallengeRequest\x12\n\n\x02r1\x18\x01 \x01(\x05\x12\n\n\x02r2\x18\x02 \x01(\x05\"(\n\x1b\x43ommitmentChallengeResponse\x12\t\n\x01\x63\x18\x01 \x01(\x05\"\x1f\n\x12VerifyProofRequest\x12\t\n\x01s\x18\x01 \x01(\x05\"7\n\x13VerifyProofResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t2\x92\x02\n\x14\x43haumPedersenService\x12\x35\n\nParameters\x12\x12.ParametersRequest\x1a\x13.ParametersResponse\x12\x37\n\x08Register\x12\x14.RegistrationRequest\x1a\x15.RegistrationResponse\x12P\n\x13\x43ommitmentChallenge\x12\x1b.CommitmentChallengeRequest\x1a\x1c.CommitmentChallengeResponse\x12\x38\n\x0bVerifyProof\x12\x13.VerifyProofRequest\x1a\x14.VerifyProofResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -36,7 +36,7 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_VERIFYPROOFREQUEST']._serialized_start=275
   _globals['_VERIFYPROOFREQUEST']._serialized_end=306
   _globals['_VERIFYPROOFRESPONSE']._serialized_start=308
-  _globals['_VERIFYPROOFRESPONSE']._serialized_end=346
-  _globals['_CHAUMPEDERSENSERVICE']._serialized_start=349
-  _globals['_CHAUMPEDERSENSERVICE']._serialized_end=623
+  _globals['_VERIFYPROOFRESPONSE']._serialized_end=363
+  _globals['_CHAUMPEDERSENSERVICE']._serialized_start=366
+  _globals['_CHAUMPEDERSENSERVICE']._serialized_end=640
 # @@protoc_insertion_point(module_scope)
