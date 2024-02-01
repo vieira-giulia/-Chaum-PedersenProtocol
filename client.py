@@ -14,15 +14,11 @@ def register_with_server():
         print(f"Received parameters: g={parameters_response.g}, h={parameters_response.h}, q={parameters_response.q}")
 
         # Choose numerical password x
-        x = input("Enter numerical password x: ")
-        while not int(x):
-            print("Invalid input for x. Please enter a valid integer.")
-            x = input("Enter numerical password x: ")
+        x = int(input("Enter numerical password x: "))
         
-        x = int(x)
         # Generate y1 = g^x and y2 = h^x
-        y1 = parameters_response.g ** x
-        y2 = parameters_response.h ** x
+        y1 = (parameters_response.g ** x)% parameters_response.q
+        y2 = (parameters_response.h ** x)% parameters_response.q
 
         # Send y1 and y2 as registration
         registration_request = proof_pb2.RegistrationRequest(y1=y1, y2=y2)
@@ -51,8 +47,8 @@ def login_to_server(g, h, q):
 
     # Generate commitment values
     k = np.random.randint(np.iinfo(np.int32).min, np.iinfo(np.int32).max)
-    r1 = g ** k
-    r2 = h ** k
+    r1 = (g ** k) % q
+    r2 = (h ** k) % q
 
     # Send commitment to server
     commitment_request = proof_pb2.CommitmentChallengeRequest(r1=r1, r2=r2)
