@@ -22,12 +22,14 @@ def register_with_server():
 
         # Send y1 and y2 as registration
         registration_request = proof_pb2.RegistrationRequest(y1=y1, y2=y2)
-        if registration_request:
+        registration_response = stub.Parameters(registration_request)
+        
+        if registration_response:
             # Print y1 and y2 for client's reference
             print('Successful registration.')
             print(f"Y1: {y1}")
             print(f"Y2: {y2}")
-            return g, h, q, x
+            return parameters_response.g, parameters_response.h, parameters_response.q, x
 
     else:
         print("Server has not produced values for g, h and q") 
@@ -37,19 +39,16 @@ def login_to_server(g, h, q):
     channel = grpc.insecure_channel('localhost:50051')
     stub = proof_pb2_grpc.ChaumPedersenServiceStub(channel)
 
+    print('Starting login')
+
     # Choose numerical password x
-    x = input("Enter numerical password x: ")
-    try:
-        x = int(x)
-    except ValueError:
-        print("Invalid input for x. Please enter a valid integer.")
-        return
+    x = int(input("Enter numerical password x: "))
 
     # Generate commitment values
     k = np.random.randint(np.iinfo(np.int32).min, np.iinfo(np.int32).max)
     r1 = (g ** k) % q
     r2 = (h ** k) % q
-
+    print(r1, r2)
     # Send commitment to server
     commitment_request = proof_pb2.CommitmentChallengeRequest(r1=r1, r2=r2)
     if commitment_request:
